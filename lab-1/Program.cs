@@ -47,7 +47,30 @@ namespace lab_1
             Console.WriteLine(cost);
 
             //ToString
+            Console.WriteLine("ToString");
             Console.WriteLine(money);
+
+
+            money.Equals(cost);
+            Money[] pricies =
+            {
+                Money.Of(11, Currency.PLN),
+                Money.Of(12, Currency.PLN),
+                Money.Of(16, Currency.USD),
+                Money.Of(13, Currency.EUR),
+                Money.Of(16, Currency.PLN),
+                Money.Of(17, Currency.PLN),
+                Money.Of(11, Currency.USD),
+                Money.Of(19, Currency.PLN),
+                Money.Of(12, Currency.EUR),
+            };
+
+            Array.Sort(pricies);
+
+                foreach(var m in pricies)
+                    {
+                        Console.WriteLine(m.ToString());
+                    }
 
         }
 
@@ -103,7 +126,7 @@ namespace lab_1
             EUR = 3
         }
 
-        public class Money
+        public class Money : IEquatable<Money>, IComparable<Money>
         {
             private readonly decimal _value;
             private readonly Currency _currency;
@@ -185,12 +208,40 @@ namespace lab_1
                 return (float)money.Value;
             }
 
+            public override string ToString()
+            {
+                return $"{_value} {_currency}";
+            }
 
+            //equels object
+            public override bool Equals(object obj)
+            {
+                return obj is Money money &&
+                       _value == money._value &&
+                       _currency == money._currency;
+            }
+            
+            public override int GetHashCode()
+            {
+                return HashCode.Combine(_value, _currency);
+            }
 
+            //equels z Equatable
+            public bool Equals(Money other)
+            {
+                return 
+                  _value == other._value &&
+                  _currency == other._currency;
+            }
+
+            public int CompareTo(Money other)
+            {
+                return _currency.CompareTo(other._currency);
+            }
         }
         //  lab1 zadanie 8, 9 do domu
 
-      
+
 
     }
 
