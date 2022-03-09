@@ -6,7 +6,7 @@ namespace lab_1
     {
         static void Main(string[] args)
         {
-            Person person = Person.Of("");
+            Person person = Person.Of("sdasdsadsa");
 
             Console.WriteLine(person);
 
@@ -24,9 +24,30 @@ namespace lab_1
 
             Money money = Money.Of(10, Currency.PLN);
             //money * 5 -> *(money, 5)
-            Money result = money * 5;
-
+            Money result = 5.2m * money;
             Console.WriteLine(result.Value);
+            Money sum = money + result;
+            Console.WriteLine(sum.Value);
+            Console.WriteLine(sum < money);
+            Console.WriteLine(money == Money.Of(10, Currency.PLN));
+            Console.WriteLine(money != Money.Of(10, Currency.PLN));
+
+            long a = 10L;
+            a = 10000000;
+            int b = 5;
+            a = b;
+            b = (int) a;
+
+
+            //operator rzutowania
+            decimal amount = money;
+            double cost = (double) money;
+            float price = (float)money;
+            Console.WriteLine(amount);
+            Console.WriteLine(cost);
+
+            //ToString
+            Console.WriteLine(money);
 
         }
 
@@ -122,7 +143,54 @@ namespace lab_1
             }
             //aby mnożyc 5* money musimy ten public operator nowy napisać
 
+            public static Money operator *(decimal b, Money a)
+            {
+                return Money.Of(a._value * b, a._currency);
+            }
+
+            public static bool operator >(Money a, Money b)
+            {
+                return a.Value > b.Value;
+            }
+
+            public static bool operator <(Money a, Money b)
+            {
+                return a.Value > b.Value;
+            }
+
+
+            public static bool operator ==(Money a, Money b)
+            {
+                return a.Value == b.Value && a.Currency == b.Currency;
+            }
+
+            public static bool operator !=(Money a, Money b)
+            {
+                return !(a == b);
+
+            }
+
+
+            public static implicit operator decimal(Money money)
+            {
+                return money.Value;
+            }
+            public static explicit operator double(Money money)
+            {
+                return (double)money.Value;
+            }
+
+            public static explicit operator float(Money money)
+            {
+                return (float)money.Value;
+            }
+
+
+
         }
+        //  lab1 zadanie 8, 9 do domu
+
+      
 
     }
 
