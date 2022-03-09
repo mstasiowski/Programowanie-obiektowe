@@ -236,7 +236,15 @@ namespace lab_1
 
             public int CompareTo(Money other)
             {
-                return _currency.CompareTo(other._currency);
+                int result =  _currency.CompareTo(other._currency);
+
+                if (result == 0)
+                {
+                    return _value.CompareTo(other._value);
+                }else
+                {
+                    return result;
+                }
             }
         }
         //  lab1 zadanie 8, 9 do domu
