@@ -7,8 +7,8 @@ namespace lab_1
         static void Main(string[] args)
         {
             Person person = Person.Of("sdasdsadsa");
-
             Console.WriteLine(person);
+
 
             DateTime dateTime = DateTime.Parse("03-02-2022");
             Console.WriteLine(dateTime);
@@ -17,10 +17,15 @@ namespace lab_1
             Console.WriteLine(newDate + " " + dateTime);
             //6 = 2 + 4
 
+
+
             string name = "adam";
             string name1 = "adam";
             string v = name.Substring(0, 2);
             Console.WriteLine(name1 == name);
+
+
+
 
             Money money = Money.Of(10, Currency.PLN);
             //money * 5 -> *(money, 5)
@@ -206,6 +211,11 @@ namespace lab_1
             public static explicit operator float(Money money)
             {
                 return (float)money.Value;
+            }
+
+            public static implicit operator Money(decimal v)
+            {
+                throw new NotImplementedException();
             }
 
             public override string ToString()
